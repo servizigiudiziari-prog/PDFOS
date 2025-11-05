@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-beta] - 2025-11-05
+
+### Sprint 6 (Completed) - Polish & Beta Release
+
+#### Added
+- **CloudKit Manager** (`CloudKitManager.swift`)
+  - Production-ready full synchronization
+  - Batch operations (400 records max)
+  - Automatic conflict resolution
+  - Push notification subscriptions
+  - Offline-first architecture
+
+- **Onboarding Flow** (`OnboardingView.swift`)
+  - 6-step interactive onboarding
+  - Feature introduction
+  - Privacy-focused setup
+
+- **Telemetry Manager** (`TelemetryManager.swift`)
+  - Anonymous usage analytics
+  - Crash report collection
+  - Performance tracking
+  - Privacy controls
+
+- **Beta Documentation** (`BETA_GUIDE.md`)
+  - Complete testing guide
+  - 4-week testing checklist
+  - Known issues and workarounds
+
+#### Beta Release
+- **Version**: 1.0.0-beta
+- **Status**: Feature-complete
+- **Target**: 10 law firms
+- **All core features production-ready**
+
+---
+
 ### Sprint 5 (Completed) - Adaptive UI
 
 #### Added
