@@ -223,7 +223,7 @@ enum UIComplexity: String, Codable {
 // MARK: - Document Models
 
 /// Represents a PDF document with version control
-struct PDFDocument: Identifiable {
+struct PDFDocument: Identifiable, Codable {
     let id: UUID
     let url: URL
     let metadata: DocumentMetadata
