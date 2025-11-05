@@ -29,10 +29,7 @@ let package = Package(
             name: "PDFOS",
             dependencies: ["PDFOSCore"],
             path: "PDFOS",
-            exclude: ["Tests"],
-            resources: [
-                .copy("Resources/Models")
-            ]
+            exclude: ["Tests"]
         ),
 
         // Core library target
@@ -61,11 +58,6 @@ let package = Package(
             name: "PerformanceTests",
             dependencies: ["PDFOSCore"],
             path: "PDFOS/Tests/PerformanceTests"
-        ),
-        .testTarget(
-            name: "UITests",
-            dependencies: ["PDFOSCore"],
-            path: "PDFOS/Tests/UITests"
         )
     ]
 )
