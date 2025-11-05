@@ -29,7 +29,7 @@ let package = Package(
             name: "PDFOS",
             dependencies: ["PDFOSCore"],
             path: "PDFOS",
-            exclude: ["Tests"]
+            sources: ["main.swift"]
         ),
 
         // Core library target
