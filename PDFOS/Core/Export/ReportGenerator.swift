@@ -131,14 +131,19 @@ actor ReportGenerator {
     }
 
     /// Generates an analytics report with performance metrics
+    /// - Note: Currently disabled - requires AnalyticsEngine implementation
     func generateAnalyticsReport(
         document: PDFDocument
     ) async throws -> URL {
-        let analyticsEngine = AnalyticsEngine.shared
-        let reports = await analyticsEngine.generateReport(period: .allTime)
+        // TODO: Implement AnalyticsEngine
+        // let analyticsEngine = AnalyticsEngine.shared
+        // let reports = await analyticsEngine.generateReport(period: .allTime)
 
         let outputURL = FileManager.default.temporaryDirectory
             .appendingPathComponent("analytics_\(UUID().uuidString).pdf")
+
+        // Placeholder: create empty report
+        let reports: [AnalyticsReport] = []
 
         try await createAnalyticsPDF(
             outputURL: outputURL,
@@ -161,7 +166,7 @@ actor ReportGenerator {
         )
 
         // Count by event type
-        var typeCounts: [EventType: Int] = [:]
+        var typeCounts: [PDFEvent.EventType: Int] = [:]
         var userCounts: [String: Int] = [:]
         var dailyCounts: [String: Int] = [:]
 

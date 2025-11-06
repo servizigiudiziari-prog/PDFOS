@@ -252,7 +252,7 @@ actor GazeTracker {
         }
     }
 
-    private func processVideoFrame(_ sampleBuffer: CMSampleBuffer) {
+    func processVideoFrame(_ sampleBuffer: CMSampleBuffer) {
         let startTime = Date()
 
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
