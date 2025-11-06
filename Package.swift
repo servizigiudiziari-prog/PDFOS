@@ -45,7 +45,8 @@ let package = Package(
                 "Tests",
                 "main.swift",
                 "Core/Storage/PerformanceOptimizer.swift",
-                "UI/Views/EnhancedTimelineView.swift"
+                "UI/Views/EnhancedTimelineView.swift",
+                "UI/Onboarding/OnboardingView.swift"
             ],
             swiftSettings: [
                 .enableUpcomingFeature("BareSlashRegexLiterals"),
