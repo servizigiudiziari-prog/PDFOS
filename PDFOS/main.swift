@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PDFOSCore
 
 #if canImport(SwiftUI)
 import SwiftUI
@@ -244,13 +245,18 @@ class AppState: ObservableObject {
 
 #else
 // Non-UI entry point for testing/CLI
-print("PDFOS - PDF Operating System")
-print("Starting in CLI mode...")
+@main
+struct PDFOSCLIApp {
+    static func main() {
+        print("PDFOS - PDF Operating System")
+        print("Starting in CLI mode...")
 
-// Run basic tests
-let eventStore = EventStore()
-let versionGraph = VersionGraph()
+        // Run basic tests
+        let eventStore = EventStore()
+        let versionGraph = VersionGraph()
 
-print("✓ Core systems initialized")
-print("Note: This is a macOS application. Please build and run on macOS with Xcode.")
+        print("✓ Core systems initialized")
+        print("Note: This is a macOS application. Please build and run on macOS with Xcode.")
+    }
+}
 #endif
