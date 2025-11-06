@@ -46,7 +46,8 @@ let package = Package(
                 "main.swift",
                 "Core/Storage/PerformanceOptimizer.swift",
                 "UI/Views/EnhancedTimelineView.swift",
-                "UI/Onboarding/OnboardingView.swift"
+                "UI/Onboarding/OnboardingView.swift",
+                "UI/Components/SemanticDiffViewer.swift"
             ],
             swiftSettings: [
                 .enableUpcomingFeature("BareSlashRegexLiterals"),

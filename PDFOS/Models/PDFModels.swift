@@ -74,7 +74,7 @@ struct SemanticDelta: Codable {
 }
 
 /// Represents a single semantic change
-struct SemanticChange: Codable {
+struct SemanticChange: Codable, Equatable {
     let changeType: ChangeType
     let location: DocumentLocation
     let semanticEmbedding: [Float]

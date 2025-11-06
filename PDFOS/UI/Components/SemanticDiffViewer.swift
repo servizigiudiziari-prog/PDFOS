@@ -169,7 +169,7 @@ struct SemanticDiffViewer: View {
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(selectedChange === change ? Color.accentColor.opacity(0.1) : Color.clear)
+                    .fill(selectedChange == change ? Color.accentColor.opacity(0.1) : Color.clear)
             )
         }
         .buttonStyle(.plain)
