@@ -151,8 +151,8 @@ actor ReportGenerator {
 
     // MARK: - Statistics Calculation
 
-    private func calculateStatistics(events: [PDFEvent]) -> DocumentStatistics {
-        var stats = DocumentStatistics()
+    private func calculateStatistics(events: [PDFEvent]) -> DetailedDocumentStatistics {
+        var stats = DetailedDocumentStatistics()
 
         stats.totalEvents = events.count
         stats.dateRange = DateInterval(
@@ -208,7 +208,7 @@ actor ReportGenerator {
     private func createPDFReport(
         outputURL: URL,
         document: PDFDocument,
-        statistics: DocumentStatistics,
+        statistics: DetailedDocumentStatistics,
         events: [PDFEvent],
         reportType: ReportType
     ) async throws {
@@ -262,7 +262,7 @@ actor ReportGenerator {
     private func drawCoverPage(
         context: CGContext,
         document: PDFDocument,
-        statistics: DocumentStatistics,
+        statistics: DetailedDocumentStatistics,
         pageRect: CGRect
     ) {
         var yPosition = pageRect.height - margins - 100
@@ -350,7 +350,7 @@ actor ReportGenerator {
 
     private func drawStatisticsPage(
         context: CGContext,
-        statistics: DocumentStatistics,
+        statistics: DetailedDocumentStatistics,
         pageRect: CGRect
     ) {
         var yPosition = pageRect.height - margins
@@ -538,7 +538,7 @@ actor ReportGenerator {
 
     private func drawActivityChart(
         context: CGContext,
-        statistics: DocumentStatistics,
+        statistics: DetailedDocumentStatistics,
         yPosition: CGFloat,
         pageRect: CGRect
     ) -> CGFloat {
@@ -772,11 +772,11 @@ actor ReportGenerator {
 
 // MARK: - Supporting Types
 
-/// Statistics about document history
-struct DocumentStatistics {
+/// Detailed statistics about document history for reporting
+struct DetailedDocumentStatistics {
     var totalEvents: Int = 0
     var dateRange: DateInterval = DateInterval()
-    var eventsByType: [EventType: Int] = [:]
+    var eventsByType: [PDFEvent.EventType: Int] = [:]
     var eventsByUser: [String: Int] = [:]
     var dailyActivity: [String: Int] = [:]
     var uniqueUsers: Int = 0

@@ -264,7 +264,7 @@ enum BehaviorPattern: String, Codable {
     // Reading patterns
     case continuousScrolling     // Scrolling through pages
     case pageFlipping           // Moving page by page
-    case sustained Reading       // Eyes focused on text
+    case sustainedReading       // Eyes focused on text
     case skimming               // Quick scanning
 
     // Editing patterns

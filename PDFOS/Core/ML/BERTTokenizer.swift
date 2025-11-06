@@ -170,11 +170,11 @@ actor BERTTokenizer {
 
         // Remove control characters
         let filtered = lowercased.filter { char in
-            !char.isNewline && !char.isControl
+            !char.isNewline && !CharacterSet.controlCharacters.contains(char.unicodeScalars.first!)
         }
 
         // Normalize whitespace
-        return filtered.components(separatedBy: .whitespacesAndNewlines)
+        return filtered.components(separatedBy: CharacterSet.whitespacesAndNewlines)
             .filter { !$0.isEmpty }
             .joined(separator: " ")
     }

@@ -41,7 +41,7 @@ actor PDFTimeTravel {
         // 2. Replay events from snapshot to target date
         let events = await eventStore.getEvents(
             documentId: document.id,
-            from: snapshot?.timestamp ?? Date.distantPast,
+            from: snapshot?.createdAt ?? Date.distantPast,
             to: date
         )
 
@@ -70,29 +70,11 @@ actor PDFTimeTravel {
         document: PDFDocument,
         speed: Float = 1.0
     ) async throws -> URL {
-        // TODO: Implement video generation in future sprint
-        // For now, return a placeholder
+        // TODO: Implement video generation using VideoReplayGenerator
+        // For now, return a placeholder URL
 
-        // 1. Get all events in time range
-        let events = await eventStore.getEvents(
-            documentId: document.id,
-            from: from,
-            to: to
-        )
-
-        // 2. Create frames for each significant change
-        let frames = try await generateFrames(
-            events: events,
-            startDocument: document
-        )
-
-        // 3. Encode frames to video
-        let videoURL = try await encodeVideo(
-            frames: frames,
-            fps: 30.0 * speed
-        )
-
-        return videoURL
+        let tempDir = FileManager.default.temporaryDirectory
+        return tempDir.appendingPathComponent("replay_\(UUID().uuidString).mp4")
     }
 
     /// Gets a modification heatmap for visualization
@@ -171,37 +153,6 @@ actor PDFTimeTravel {
         cachedStates[date] = document
     }
 
-    /// Generates frames for video replay
-    private func generateFrames(
-        events: [PDFEvent],
-        startDocument: PDFDocument
-    ) async throws -> [VideoFrame] {
-        var frames: [VideoFrame] = []
-        var currentDocument = startDocument
-
-        for event in events {
-            currentDocument = try await applyEvent(event, to: currentDocument)
-
-            // Create frame
-            let frame = VideoFrame(
-                timestamp: event.timestamp,
-                document: currentDocument,
-                highlightedChanges: [event]
-            )
-            frames.append(frame)
-        }
-
-        return frames
-    }
-
-    /// Encodes frames to video
-    private func encodeVideo(frames: [VideoFrame], fps: Float) async throws -> URL {
-        // TODO: Implement video encoding with AVFoundation
-        // For now, return a placeholder URL
-        let tempDir = FileManager.default.temporaryDirectory
-        return tempDir.appendingPathComponent("replay_\(UUID().uuidString).mp4")
-    }
-
     /// Buckets time into intervals
     private func bucketTime(_ date: Date, bucketSize: TimeInterval) -> Date {
         let interval = date.timeIntervalSince1970
@@ -260,13 +211,6 @@ struct TimelineEvent: Identifiable {
     let type: PDFEvent.EventType
     let description: String
     let userId: String
-}
-
-/// Represents a video frame for replay
-struct VideoFrame {
-    let timestamp: Date
-    let document: PDFDocument
-    let highlightedChanges: [PDFEvent]
 }
 
 /// Playback state for time travel

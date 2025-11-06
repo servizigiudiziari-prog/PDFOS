@@ -79,7 +79,7 @@ actor CloudKitSyncEngine {
 
             // Batch save (max 400 per batch)
             for batch in records.chunked(into: 400) {
-                try await privateDatabModifyRecords(saving: batch, deleting: [])
+                try await privateDatabase.modifyRecords(saving: batch, deleting: [])
             }
         }
         #else
@@ -150,8 +150,8 @@ actor CloudKitSyncEngine {
     }
 
     /// Gets sync status
-    func getSyncStatus() -> SyncStatus {
-        SyncStatus(
+    func getSyncStatus() -> CloudKitSyncStatus {
+        CloudKitSyncStatus(
             state: syncState,
             lastSyncDate: lastSyncDate,
             pendingChangesCount: pendingChanges.values.flatMap { $0 }.count
@@ -372,7 +372,7 @@ enum SyncState {
 }
 
 /// Sync status
-struct SyncStatus {
+struct CloudKitSyncStatus {
     let state: SyncState
     let lastSyncDate: Date?
     let pendingChangesCount: Int
