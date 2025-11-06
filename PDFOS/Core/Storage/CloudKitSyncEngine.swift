@@ -365,10 +365,21 @@ actor CloudKitSyncEngine {
 // MARK: - Supporting Types
 
 /// Sync state
-enum SyncState {
+enum SyncState: Equatable {
     case idle
     case syncing
     case failed(Error)
+
+    static func == (lhs: SyncState, rhs: SyncState) -> Bool {
+        switch (lhs, rhs) {
+        case (.idle, .idle), (.syncing, .syncing):
+            return true
+        case (.failed, .failed):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 /// Sync status
