@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 /// Controls UI complexity based on user behavior and cognitive load
 @MainActor
@@ -18,7 +19,7 @@ class AdaptiveUIController: ObservableObject {
     // MARK: - Private Properties
 
     private var userIntent: UserIntent = .idle
-    private let intentHistory: RingBuffer<UserIntent>
+    private var intentHistory: RingBuffer<UserIntent>
     private var adaptationEnabled = true
 
     // MARK: - Initialization
