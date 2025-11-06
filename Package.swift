@@ -41,7 +41,11 @@ let package = Package(
                 .product(name: "AsyncAlgorithms", package: "swift-async-algorithms")
             ],
             path: "PDFOS",
-            exclude: ["Tests", "main.swift"],
+            exclude: [
+                "Tests",
+                "main.swift",
+                "Core/Storage/PerformanceOptimizer.swift"
+            ],
             swiftSettings: [
                 .enableUpcomingFeature("BareSlashRegexLiterals"),
                 .enableExperimentalFeature("StrictConcurrency")
