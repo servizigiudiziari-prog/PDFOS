@@ -44,7 +44,8 @@ let package = Package(
             exclude: [
                 "Tests",
                 "main.swift",
-                "Core/Storage/PerformanceOptimizer.swift"
+                "Core/Storage/PerformanceOptimizer.swift",
+                "UI/Views/EnhancedTimelineView.swift"
             ],
             swiftSettings: [
                 .enableUpcomingFeature("BareSlashRegexLiterals"),
