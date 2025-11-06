@@ -87,10 +87,18 @@ struct SemanticChange: Codable, Equatable {
         case added
         case removed
     }
+
+    static func == (lhs: SemanticChange, rhs: SemanticChange) -> Bool {
+        lhs.changeType == rhs.changeType &&
+        lhs.location == rhs.location &&
+        lhs.semanticEmbedding == rhs.semanticEmbedding &&
+        lhs.similarity == rhs.similarity &&
+        lhs.affectedSections == rhs.affectedSections
+    }
 }
 
 /// Represents a location in a PDF document
-struct DocumentLocation: Codable {
+struct DocumentLocation: Codable, Equatable {
     let pageIndex: Int
     let sectionId: String?
     let paragraphIndex: Int?
@@ -106,6 +114,14 @@ struct DocumentLocation: Codable {
         self.sectionId = sectionId
         self.paragraphIndex = paragraphIndex
         self.characterRange = characterRange
+    }
+
+    static func == (lhs: DocumentLocation, rhs: DocumentLocation) -> Bool {
+        lhs.pageIndex == rhs.pageIndex &&
+        lhs.sectionId == rhs.sectionId &&
+        lhs.paragraphIndex == rhs.paragraphIndex &&
+        lhs.characterRange?.lowerBound == rhs.characterRange?.lowerBound &&
+        lhs.characterRange?.upperBound == rhs.characterRange?.upperBound
     }
 }
 
