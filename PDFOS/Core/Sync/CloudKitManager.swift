@@ -376,9 +376,9 @@ actor CloudKitManager {
 
         // Set fields
         record["title"] = document.metadata.title as CKRecordValue
-        record["author"] = document.metadata.author as CKRecordValue
-        record["createdAt"] = document.metadata.createdAt as CKRecordValue
-        record["modifiedAt"] = document.metadata.modifiedAt as CKRecordValue
+        record["author"] = (document.metadata.author ?? "") as CKRecordValue
+        record["createdAt"] = document.createdAt as CKRecordValue
+        record["modifiedAt"] = document.modifiedAt as CKRecordValue
 
         // Encode document data
         let encoder = JSONEncoder()
