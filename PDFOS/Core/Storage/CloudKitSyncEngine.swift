@@ -55,7 +55,7 @@ actor CloudKitSyncEngine {
             try await privateDatabase.save(record)
         }
         #else
-        throw SyncError.cloudKitNotAvailable
+        throw CloudKitSyncError.cloudKitNotAvailable
         #endif
     }
 
@@ -67,7 +67,7 @@ actor CloudKitSyncEngine {
             try await privateDatabase.save(record)
         }
         #else
-        throw SyncError.cloudKitNotAvailable
+        throw CloudKitSyncError.cloudKitNotAvailable
         #endif
     }
 
@@ -83,7 +83,7 @@ actor CloudKitSyncEngine {
             }
         }
         #else
-        throw SyncError.cloudKitNotAvailable
+        throw CloudKitSyncError.cloudKitNotAvailable
         #endif
     }
 
@@ -94,7 +94,7 @@ actor CloudKitSyncEngine {
         let record = try await privateDatabase.record(for: recordID)
         return try parseDocumentRecord(record)
         #else
-        throw SyncError.cloudKitNotAvailable
+        throw CloudKitSyncError.cloudKitNotAvailable
         #endif
     }
 
@@ -119,14 +119,14 @@ actor CloudKitSyncEngine {
 
         return versions.sorted { $0.timestamp < $1.timestamp }
         #else
-        throw SyncError.cloudKitNotAvailable
+        throw CloudKitSyncError.cloudKitNotAvailable
         #endif
     }
 
     /// Performs full sync (pull then push)
     func performFullSync() async throws {
         guard syncState == .idle else {
-            throw SyncError.syncInProgress
+            throw CloudKitSyncError.syncInProgress
         }
 
         syncState = .syncing
@@ -256,7 +256,7 @@ actor CloudKitSyncEngine {
               let pageCount = record["pageCount"] as? Int,
               let createdAt = record["createdAt"] as? Date,
               let modifiedAt = record["modifiedAt"] as? Date else {
-            throw SyncError.invalidRecord
+            throw CloudKitSyncError.invalidRecord
         }
 
         let metadata = DocumentMetadata(
@@ -294,7 +294,7 @@ actor CloudKitSyncEngine {
               let timestamp = record["timestamp"] as? Date,
               let parentIdsStrings = record["parentIds"] as? [String],
               let deltaData = record["semanticDelta"] as? Data else {
-            throw SyncError.invalidRecord
+            throw CloudKitSyncError.invalidRecord
         }
 
         let parentIds = parentIdsStrings.compactMap { UUID(uuidString: $0) }
@@ -317,12 +317,12 @@ actor CloudKitSyncEngine {
         // Check iCloud availability
         let status = try await container.accountStatus()
         guard status == .available else {
-            throw SyncError.iCloudNotAvailable
+            throw CloudKitSyncError.iCloudNotAvailable
         }
 
         try await operation()
         #else
-        throw SyncError.cloudKitNotAvailable
+        throw CloudKitSyncError.cloudKitNotAvailable
         #endif
     }
 
@@ -403,7 +403,7 @@ struct Change {
 }
 
 /// Sync errors
-enum SyncError: Error {
+enum CloudKitSyncError: Error {
     case cloudKitNotAvailable
     case iCloudNotAvailable
     case syncInProgress
@@ -412,7 +412,7 @@ enum SyncError: Error {
     case networkError
 }
 
-extension SyncError: LocalizedError {
+extension CloudKitSyncError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .cloudKitNotAvailable:
@@ -427,16 +427,6 @@ extension SyncError: LocalizedError {
             return "Sync conflict detected"
         case .networkError:
             return "Network error during sync"
-        }
-    }
-}
-
-// MARK: - Array Extension
-
-extension Array {
-    func chunked(into size: Int) -> [[Element]] {
-        stride(from: 0, to: count, by: size).map {
-            Array(self[$0..<Swift.min($0 + size, count)])
         }
     }
 }

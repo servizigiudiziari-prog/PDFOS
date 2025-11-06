@@ -743,7 +743,7 @@ actor ReportGenerator {
 
     // MARK: - Helper Methods
 
-    private func describeEventType(_ type: EventType) -> String {
+    private func describeEventType(_ type: PDFEvent.EventType) -> String {
         switch type {
         case .textEdit: return "Text Edit"
         case .textInsert: return "Text Insert"
@@ -798,6 +798,23 @@ enum ReportError: Error {
     case pdfKitNotAvailable
     case noData
     case writeFailed
+}
+
+/// Analytics report for performance metrics
+struct AnalyticsReport {
+    let period: AnalyticsPeriod
+    let avgSemanticLatency: TimeInterval
+    let avgMemoryUsage: Int64
+    let totalEvents: Int
+    let cacheHitRate: Float
+}
+
+/// Analytics time period
+enum AnalyticsPeriod {
+    case last24Hours
+    case last7Days
+    case last30Days
+    case allTime
 }
 
 extension ReportError: LocalizedError {

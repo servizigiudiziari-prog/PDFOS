@@ -29,7 +29,7 @@ actor PerformanceOptimizer {
 
     init(
         eventStore: EventStoreOptimized = EventStoreOptimized(),
-        embeddingService: SemanticEmbeddingService = SemanticEmbeddingService.shared,
+        embeddingService: SemanticEmbeddingService = SemanticEmbeddingService(),
         largeDocumentThreshold: Int = 100,
         batchSize: Int = 10,
         prefetchSize: Int = 20,

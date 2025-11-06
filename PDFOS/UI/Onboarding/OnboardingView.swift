@@ -222,22 +222,22 @@ struct AdaptiveUIStep: View {
 
                 if viewModel.enableAdaptiveUI {
                     VStack(alignment: .leading, spacing: 12) {
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "1.circle.fill",
                             text: "Minimal Mode - Clean reading"
                         )
 
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "2.circle.fill",
                             text: "Reading Mode - Navigation tools"
                         )
 
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "3.circle.fill",
                             text: "Editing Mode - Common edits"
                         )
 
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "4.circle.fill",
                             text: "Power Mode - All features"
                         )
@@ -284,22 +284,22 @@ struct CloudSyncStep: View {
 
                 if viewModel.enableCloudSync {
                     VStack(spacing: 15) {
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "checkmark.circle.fill",
                             text: "Automatic backup to iCloud"
                         )
 
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "checkmark.circle.fill",
                             text: "Cross-device synchronization"
                         )
 
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "checkmark.circle.fill",
                             text: "Version history preserved"
                         )
 
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "checkmark.circle.fill",
                             text: "Works offline, syncs when online"
                         )
@@ -358,22 +358,22 @@ struct PermissionsStep: View {
                     }
 
                     VStack(alignment: .leading, spacing: 8) {
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "checkmark.circle.fill",
                             text: "All processing on-device"
                         )
 
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "checkmark.circle.fill",
                             text: "No data sent to external servers"
                         )
 
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "checkmark.circle.fill",
                             text: "Camera never records video"
                         )
 
-                        InfoRow(
+                        OnboardingInfoRow(
                             icon: "checkmark.circle.fill",
                             text: "Optional anonymous analytics"
                         )
@@ -457,17 +457,17 @@ struct CompletionStep: View {
             }
 
             VStack(spacing: 15) {
-                InfoRow(
+                OnboardingInfoRow(
                     icon: "command",
                     text: "Press Cmd+T to open Timeline"
                 )
 
-                InfoRow(
+                OnboardingInfoRow(
                     icon: "command",
                     text: "Press Cmd+1/2/3/4 to change UI mode"
                 )
 
-                InfoRow(
+                OnboardingInfoRow(
                     icon: "command",
                     text: "Press Cmd+Shift+A for Adaptive UI"
                 )
@@ -484,7 +484,7 @@ struct CompletionStep: View {
 
 // MARK: - Info Row
 
-struct InfoRow: View {
+struct OnboardingInfoRow: View {
     let icon: String
     let text: String
 

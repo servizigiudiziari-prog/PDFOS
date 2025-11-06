@@ -146,7 +146,7 @@ struct BERTModel {
         // Placeholder: return random embeddings
         return (0..<768).map { _ in Float.random(in: -1...1) }
     }
-    #endif
+    #else
 
     /// Generates embeddings (fallback for non-CoreML platforms)
     func predict(tokens: [Int]) throws -> [Float] {
@@ -164,6 +164,7 @@ struct BERTModel {
         let magnitude = sqrt(vector.map { $0 * $0 }.reduce(0, +))
         return vector.map { $0 / magnitude }
     }
+    #endif
 }
 
 // MARK: - Supporting Types
